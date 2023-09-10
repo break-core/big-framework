@@ -43,7 +43,7 @@
 	===========
 		\\\ Play SFX
 		Audio.Play(
-			id / ids,				<-- |REQ|	Sound ID; Supports link or just ID. (also supports array of IDs. Will pick one by random)
+			id / ids,				<-- |REQ|	Sound ID Supports link or just ID. (also supports array of IDs. Will pick one by random)
 			parent / position,		<-- |REQ|	Sound parent or position (cf/v3)
 			pitch,					<--			Sound pitch 										[defaults to: 1]
 			volume,					<-- 		Sound volume										[defaults to: 0.5]
@@ -76,27 +76,27 @@
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --------|       Top       |--------
-local Audio = {};
+local Audio = {}
 
 --------|     Setting     |--------
 
 --------|     Library     |--------
-local ReplicatedStorage = game:GetService("ReplicatedStorage");
-local Library = ReplicatedStorage:WaitForChild("Library");
-local ClientLibrary = Library:WaitForChild("Client");
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Library = ReplicatedStorage:WaitForChild("Library")
+local ClientLibrary = Library:WaitForChild("Client")
 
 --------|     Shared      |--------
-local RunService = game:GetService("RunService");
-local Functions = require(Library.Functions);
+local RunService = game:GetService("RunService")
+local Functions = require(Library.Functions)
 
 --------|    Reference    |--------
-local debris = workspace:WaitForChild("__DEBRIS");
-local musicFolder = Instance.new("Folder", script);
-local rng = Random.new();
+local debris = workspace:WaitForChild("__DEBRIS")
+local musicFolder = Instance.new("Folder", script)
+local rng = Random.new()
 
 --------|    Variables    |--------
-local garbage = {};
-local isClient = RunService:IsClient();
+local garbage = {}
+local isClient = RunService:IsClient()
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,25 +109,25 @@ local isClient = RunService:IsClient();
 function Audio.Play(...) -- Line: 109
 	--- If server, tell clients to play sound (to keep a secular soundscape)
 	if not isClient then
-		local ServerScriptService = game:GetService("ServerScriptService");
-		local ServerNetwork = require(ServerScriptService:WaitForChild("Library").Network);
-		local args = {...};
-		ServerNetwork.FireAll("PlaySound", unpack(args));
-		return nil;
+		local ServerScriptService = game:GetService("ServerScriptService")
+		local ServerNetwork = require(ServerScriptService:WaitForChild("Library").Network)
+		local args = {...}
+		ServerNetwork.FireAll("PlaySound", unpack(args))
+		return nil
 	end
 	
 	--- Unpack
-	local id, parent, pitch, volume, maxDistance, soundGroup, looped, startTime = unpack({...});
+	local id, parent, pitch, volume, maxDistance, soundGroup, looped, startTime = unpack({...})
 	
 	--- Array of IDs support
 	if type(id) == "table" then
-		id = id[rng:NextInteger(1, #id)];
+		id = id[rng:NextInteger(1, #id)]
 	end
 	
 	--- Sanity checks
 	if not parent then
 		--- Abort! Parent doesn't exist.
-		warn("Parent cannot be nil", debug.traceback());
+		warn("Parent cannot be nil", debug.traceback())
 		return
 	elseif id == 0 then
 		--- Sound ID is 0 (removed error because console spamming issues)
@@ -136,96 +136,96 @@ function Audio.Play(...) -- Line: 109
 	
 	--- Missing link
 	if type(id) == "number" or (not string.find(id, "rbxassetid://")) then
-		id = "rbxassetid://" .. id;
+		id = "rbxassetid://" .. id
 	end
 	
 	--- Array of pitches support
 	if pitch and type(pitch) == "table" then
-		pitch = rng:NextNumber(unpack(pitch));
+		pitch = rng:NextNumber(unpack(pitch))
 	end
 	
 	--- Array of volumes support
 	if volume and type(volume) == "table" then
-		volume = rng:NextNumber(unpack(volume));
+		volume = rng:NextNumber(unpack(volume))
 	end
 	
 	--- Variables
-	pitch = pitch or 1;
-	volume = volume or 0.5;
-	soundGroup = soundGroup and game.SoundService:FindFirstChild(soundGroup) or nil;
-	looped = looped or false;
-	maxDistance = maxDistance or 100;
-	startTime = startTime == nil and 0 or startTime;
+	pitch = pitch or 1
+	volume = volume or 0.5
+	soundGroup = soundGroup and game.SoundService:FindFirstChild(soundGroup) or nil
+	looped = looped or false
+	maxDistance = maxDistance or 100
+	startTime = startTime == nil and 0 or startTime
 	--
 	
-	local rollOffMode = Enum.RollOffMode.Linear;
-	local name = "sound-" .. id;
-	local parentWasGenerated = false;
+	local rollOffMode = Enum.RollOffMode.Linear
+	local name = "sound-" .. id
+	local parentWasGenerated = false
 	
 	--- If parent is Vector3/CFrame - create sound part!
 	if not pcall(function() local x = parent.Parent end) then
-		local position = parent;
-		
+		local position = parent
 		--- If Vector3, convert to CFrame
 		pcall(function() -- Line: 169
-			position = CFrame.new(position);
-		end);
+			position = CFrame.new(position)
+		end)
 		
 		--- Create host part for sound
-		parent = Instance.new("Part");
-		parent.Anchored = true;
-		parent.CanCollide = false;
-		parent.CFrame = position;
-		parent.Size = Vector3.new();
-		parent.Transparency = 1;
-		parent.Parent = debris;
+		parent = Instance.new("Part")
+		parent.Anchored = true
+		parent.CanCollide = false
+		parent.CFrame = position
+		parent.Size = Vector3.new()
+		parent.Transparency = 1
+		parent.Parent = debris
 		
 		--- Flag parent for garbage collection
-		parentWasGenerated = true;
+		parentWasGenerated = true
 	end
 	
 	--- Create
-	local sound = Instance.new("Sound");
-	sound.SoundId = id;
-	sound.Name = name;
-	sound.Pitch = pitch;
-	sound.Volume = volume;
-	sound.SoundGroup = soundGroup;
-	sound.Looped = looped;
-	sound.MaxDistance = maxDistance;
-	sound.TimePosition = startTime;
-	sound.RollOffMode = rollOffMode;
-	sound.Parent = parent;
+	local sound = Instance.new("Sound")
+	sound.SoundId = id
+	sound.Name = name
+	sound.Pitch = pitch
+	sound.Volume = volume
+	sound.SoundGroup = soundGroup
+	sound.Looped = looped
+	sound.MaxDistance = maxDistance
+	sound.TimePosition = startTime
+	sound.RollOffMode = rollOffMode
+	sound.Parent = parent
 	
 	--- Muted?
 	if not require(ClientLibrary.Settings).SoundsEnabled then
-		sound:SetAttribute("CachedVolume", sound.Volume);
-		sound.Volume = 0;
+		sound:SetAttribute("CachedVolume", sound.Volume)
+		sound.Volume = 0
 	end
 	
 	--- Play sound
-	sound:Play();
+	sound:Play()
 	
 	--- Add to garbage collection
-	AddToGarbageCollection(sound, parentWasGenerated);
+	AddToGarbageCollection(sound, parentWasGenerated)
 	
 	--
-	return sound;
+	return sound
 end
 
 
+--- Audio player for music
 function Audio.PlayMusic(id, volume, speed, soundGroup, looped, startTime) -- Line: 217
 	--- Disable being called on server (compatibility reasons)
 	if not isClient then
-		warn("Cannot use this on the server!");
-		return;
+		warn("Cannot use this on the server!")
+		return
 	end
 	
 	--- Sanity checks
 	if not require(ClientLibrary.Settings).MusicEnabled then
 		--- Abort! Sounds are disabled in settings
-		warn("Music is disabled in settings module!");
-		return;
+		warn("Music is disabled in settings module!")
+		return
 	end
 	
 	if id == 0 then
@@ -235,65 +235,65 @@ function Audio.PlayMusic(id, volume, speed, soundGroup, looped, startTime) -- Li
 	
 	--- Missing link
 	if type(id) == "number" or not string.find(id, "rbxassetid://", 1, true) then
-		id = "rbxassetid://" .. id;
+		id = "rbxassetid://" .. id
 	end
 	
 	--- Variables
-	volume = volume or 0.5;
-	speed = speed or 1;
-	soundGroup = soundGroup and game.SoundService:FindFirstChild(soundGroup) or nil;
-	looped = looped == nil and true or looped;
-	startTime = startTime == nil and 0 or startTime;
+	volume = volume or 0.5
+	speed = speed or 1
+	soundGroup = soundGroup and game.SoundService:FindFirstChild(soundGroup) or nil
+	looped = looped == nil and true or looped
+	startTime = startTime == nil and 0 or startTime
 	--
-	local name = "music-" .. id;
+	local name = "music-" .. id
 	
 	--- Create
-	local music = Instance.new("Sound");
-	music.SoundId = id;
-	music.Volume = 0;
-	music.Looped = looped;
-	music.SoundGroup = soundGroup;
-	music.Parent = musicFolder;
-	music:Play();
+	local music = Instance.new("Sound")
+	music.SoundId = id
+	music.Volume = 0
+	music.Looped = looped
+	music.SoundGroup = soundGroup
+	music.Parent = musicFolder
+	music:Play()
 	
 	--- Fade function
 	local function Fade(song, newVolume) -- Line: 260
-		Functions.Tween(song, {Volume = newVolume}, {speed});
+		Functions.Tween(song, {Volume = newVolume}, {speed})
 	end
 	
 	--- Fade out
 	for _, song in ipairs(musicFolder:GetChildren()) do
-		Functions.Tween(song, {Volume = 0}, {speed});
+		Functions.Tween(song, {Volume = 0}, {speed})
 	end
 	
 	--- Fade in
-	Functions.Tween(music, {Volume = volume}, {speed});
+	Functions.Tween(music, {Volume = volume}, {speed})
 	
 	--
-	AddToGarbageCollection(music);
+	AddToGarbageCollection(music)
 	--
-	return music;
+	return music
 end
 
 
 function Audio.StopMusic(speed) -- Line: 279
 	--- Disable being called on server (compatibility reasons)
 	if not isClient then
-		warn("Cannot use this on the server!");
-		return;
+		warn("Cannot use this on the server!")
+		return
 	end
 	
 	--- Variables
-	speed = speed or 1;
+	speed = speed or 1
 	
 	--- Fade function
 	local function Fade(song, newVolume) -- Line: 290
-		Functions.Tween(song, {Volume = newVolume}, {speed});
+		Functions.Tween(song, {Volume = newVolume}, {speed})
 	end
 	
 	--- Stop current music
 	for _, song in ipairs(musicFolder:GetChildren()) do
-		Functions.Tween(song, {Volume = 0}, {speed});
+		Functions.Tween(song, {Volume = 0}, {speed})
 	end
 end
 
@@ -304,7 +304,7 @@ end
 --- Pile onto garbage collection
 function AddToGarbageCollection(sound, parentWasGenerated) -- Line: 305
 	--- Add garbage collection
-	table.insert(garbage, {sound, parentWasGenerated or false});
+	table.insert(garbage, {sound, parentWasGenerated or false})
 end
 
 
@@ -312,46 +312,46 @@ end
 function ScanGarbageCollection() -- Line: 312
 	for i = #garbage, 1, -1 do
 		if i % 25 == 0 then
-			RunService.Heartbeat:Wait();
+			RunService.Heartbeat:Wait()
 		end
 		
 		--- Variables
-		local garbageArray = garbage[i];
-		local garbageItem = garbageArray[1];
-		local garbageParentWasGenerated = garbageArray[2];
-		local due = false;
+		local garbageArray = garbage[i]
+		local garbageItem = garbageArray[1]
+		local garbageParentWasGenerated = garbageArray[2]
+		local due = false
 		
 		--- Sanity check
 		if not due and (not garbageItem or not garbageItem.Parent) then
-			due = true;
+			due = true
 		end
 		
 		--- Stopped check #1
 		if not due and not garbageItem.Playing then
-			due = true;
+			due = true
 		end
 		
 		--- Empty sound check
 		if not due and garbageItem.SoundId == "" then
-			due = true;
+			due = true
 		end
 		
 		--- Remove if due
 		if due then
 			if garbageParentWasGenerated then
 				if garbageItem.Parent then
-					Functions.AddDebris(garbageItem.Parent, 0);
+					Functions.AddDebris(garbageItem.Parent, 0)
 				end
 			elseif garbageItem then
-				Functions.AddDebris(garbageItem, 0);
+				Functions.AddDebris(garbageItem, 0)
 			end
-			table.remove(garbage, i);
+			table.remove(garbage, i)
 		end
 	end
 	
 	--- Debug
 	if isClient then
-		require(ClientLibrary.Debug).Track("Garbage #", "Audio", #garbage);
+		require(ClientLibrary.Debug).Track("Garbage #", "Audio", #garbage)
 	end
 end
 -- coroutine.wrap(function()
@@ -368,15 +368,15 @@ end
 -- 		end
 -- 	end
 -- end)()
-coroutine.wrap(function() -- Line: 371
+coroutine.wrap(function() -- Can you believe this matches? I couldn't
 	if isClient then
 		while true do
 			--- Wait
-			wait(1);
+			wait(1)
 			
 			--- Scan garbage
-			ScanGarbageCollection();
-			local audioPlaying = false;
+			ScanGarbageCollection()
+			local audioPlaying = false
 			
 			--- Loop around
 			for _, audio in ipairs(musicFolder:GetChildren()) do
@@ -384,7 +384,7 @@ coroutine.wrap(function() -- Line: 371
 				break
 			end
 			
-			require(ClientLibrary.Debug).Track("Music Playing", "Audio", audioPlaying);
+			require(ClientLibrary.Debug).Track("Music Playing", "Audio", audioPlaying)
 		end
 	end
 end)()
@@ -393,42 +393,42 @@ end)()
 --- Disabled sounds
 if isClient then
 	coroutine.wrap(function() -- Line: 395
-		local Settings = require(ClientLibrary.Settings);
-		local last = Settings.SoundsEnabled;
+		local Settings = require(ClientLibrary.Settings)
+		local last = Settings.SoundsEnabled
 		while true do
 			if last ~= Settings.SoundsEnabled then
-				last = Settings.SoundsEnabled;
+				last = Settings.SoundsEnabled
 				
 				--- Scan all active sounds
 				for i, v in pairs(garbage) do
-					local sound = v[1];
+					local sound = v[1]
 					if not sound or sound.Parent == musicFolder then
 						if not last then
 							--- Mute sound and cache volume
-							sound:SetAttribute("CachedVolume", sound.Volume);
-							sound.Volume = 0;
+							sound:SetAttribute("CachedVolume", sound.Volume)
+							sound.Volume = 0
 							
 						elseif not sound:GetAttribute("CachedVolume") then
 							-- Make the attribute
-							sound.Volume = sound:GetAttribute("CachedVolume");
-							sound:SetAttribute("CachedVolume", nil);
+							sound.Volume = sound:GetAttribute("CachedVolume")
+							sound:SetAttribute("CachedVolume", nil)
 						end
 					end
 				end
 			end
 			
 			-- WAIT!!
-			RunService.Heartbeat:Wait();
+			RunService.Heartbeat:Wait()
 		end
-	end);
+	end)
 end
 
 
 --- Recieve sounds from server
 if isClient then
 	require(ClientLibrary.Network).Fired("PlaySound"):Connect(function(...) -- Line: 429
-		Audio.Play(...);
-	end);
+		Audio.Play(...)
+	end)
 end
 
 
@@ -436,4 +436,4 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-return Audio;
+return Audio

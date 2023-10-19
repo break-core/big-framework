@@ -1,9 +1,104 @@
 
+--[[
+	                                                                ,,╓╓╥╗╗@@@╣╢
+	                                               ,²╓╓╥╗@@@╣╣╢▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒U
+	                               ,,╓╓╥m╗@@@╣╢▒▒▒▒▒▒▒▒▒Ñ╜`         "╙╣▒▒▒▒▒▒▒▒╣
+	               ,,╓╓╗╗╗@@╣╣╢▒▒▒▒▒▒╣╝╨╜╙"`║▒▒▒▒▒▒▒▒╢╜                `╣▒▒▒▒▒▒▒
+	,╓╓╥╗@@@╣╢╢▒▒▒▒ÑÑ╝╝╨╜╨╝╝╣▒▒▒▒▒▒▒▒╢      ]▒▒▒▒▒▒▒╝         ,,         ╙▒▒▒▒▒▒
+	║▒▒▒▒▒"`                  `╝▒▒▒▒▒▒       ▒▒▒▒▒▒╝      ,@▒▒▒▒▒╣╗     ╓╗╣▒▒▒▒▒[
+	 ▒▒▒▒▒U                     └▒▒▒▒▒       ║▒▒▒▒╣       ╢▒▒▒▒▒▒▒▒╢╗╣╣▒▒▒▒▒▒▒▒▒▒
+	 ▒▒▒▒▒╣       ²╓╓╥╗╗╗╖       ]▒▒▒▒[      ]▒▒▒▒[      ║▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+	 ║▒▒▒▒▒       ▒▒▒▒▒▒▒▒╣      ]▒▒▒▒▒       ▒▒▒▒[      ║▒▒▒▒▒▒▒▒▒▒╢╢Ñ╝╨╜╙╙▒▒▒▒▒[
+	 ]▒▒▒▒▒       ╢▒▒▒▒▒▒╢╜      ║▒▒▒▒▒       ╢▒▒▒[      ]▒▒▒▒▒[            ╢▒▒▒▒╢
+	  ▒▒▒▒▒[      └╙"``         @▒▒▒▒▒▒[      ]▒▒▒╢       ▒▒▒▒▒╣            ║▒▒▒▒▒
+	  ║▒▒▒▒╢                   ²╙╣▒▒▒▒▒▒       ▒▒▒▒       ║▒▒▒▒▒   ,²╓      ]▒▒▒▒▒U
+	  ]▒▒▒▒▒                       ╣▒▒▒▒       ╢▒▒▒╣       ╢▒▒▒▒▒▒▒▒▒╜       ▒▒▒▒▒╣
+	   ▒▒▒▒▒[      ]@╣╣▒▒▒▒╣╗       ▒▒▒▒[      ║▒▒▒▒╗       ╙╣▒▒▒▒▒Ñ`        ║▒▒▒▒▒
+	   ╢▒▒▒▒╢       ▒▒▒▒▒▒▒▒▒U      ║▒▒▒╢      ]▒▒▒▒▒@                       ]▒▒▒▒▒
+	   ║▒▒▒▒▒       ╣▒▒▒▒▒▒▒╢       ║▒▒▒▒       ▒▒▒▒▒▒╣╖               ,[     ▒▒▒▒▒[
+	    ▒▒▒▒▒U      ║Ñ╝╨╜╙"²        ▒▒▒▒▒       ║▒▒▒▒▒▒▒▒@╖,        ,╥╣▒╢@@╣╣╢▒▒▒▒╢╢
+	    ▒▒▒▒▒[                    ╓╢▒▒▒▒▒[      ]▒▒▒▒▒▒▒▒▒▒▒▒▒╢╢╢▒╢ÑÑ╝╝╜╙""`
+	    ║▒▒▒▒▒                ,╓@╢▒▒▒▒▒▒▒▒@╣╣╢▒▒▒▒╢Ñ╝╝╨╜╙""`           ╓╗@@@╗╖
+	    ]▒▒▒▒▒    ,,╓╓╗╗@@@╣▒▒▒▒▒▒╢ÑÑ╝╝╜╙"``        ,²╓  ╔@@@╣╣╢▒▒▒U ,╣▒Ñ╙"╙╢▒Ñ
+	     ▒▒▒▒▒▒▒▒▒╢Ñ╝╝╨╜╙"``             ╥@@@╗    ]▒▒▒▒  ]▒▒╣"``     ]▒▒╗,
+	     "``       ,╓╖╓,       ]▒▒▒╣     ]▒▒▒▒╖   ║▒▒▒▒[  ▒▒▒   ,,    ╙╣▒▒▒▒╣%╖
+	            ,╣▒▒╢╣╣▒▒@     ╢▒▒╣▒╣     ▒▒╢╣▒╖  ▒▒[▒▒╢  ║▒▒▒▒▒▒▒r       `"╙╣▒▒╕
+	            ╣▒╣    ╙╜`     ▒▒╢ ╣▒╣    ▒▒▒╙▒▒╕]▒▒ ║▒▒  ]▒▒[         ╓@     ▒▒╢
+	           ║▒▒[       ,   ]▒▒[  ▒▒╣   ║▒▒ ╙▒▒@▒▒ ]▒▒L  ▒▒╢   ,,╓╓  ╣▒▒╣@╣▒▒╣
+	           ]▒▒[  ]╢▒▒▒▒[  ║▒▒╣╣╣╢▒▒╣  ]▒▒[ ╙▒▒▒[  ▒▒╣  ╢▒▒▒▒▒▒▒╢Ñ~    "╙"`  		
+	            ╢▒▒     ]▒▒╢  ╢▒▒╙"``╙▒▒@  ▒▒╢  ╙▒╢`  ╨╜╜  ``
+	             ╣▒▒h╖╥@▒▒▒▒ j▒▒╣     ╙╜╙` `
+	              `╙╝ÑÑ╝╙ "`
+                                                       
+    
+	BIG Games rbx.lua Framework [2017] - [2023]
+	Written by Preston - preston@biggames.io
+	Developed with a keyboard and pixie dust.
+	
+	-+-+-+- SPECIFICS -+-+-+-
+	_L.Signal
+	===========
+	
+	Easier and more streamlined + automatic usage of BindableEvents & Bindablefuncs. Faster and easier syntax.
+	Signals do not replicate (use _L.Network for that).
 
--- Check if the current environment is a server
-local isServer = game:GetService("RunService"):IsServer()
+	Update 8/20/20: now hack proof ayy
+		
+	===========
+		\\\ Substitute for BindableEvents:Fire
+		Signal.Fire(
+			signalName,				<--	|REQ|	Signal name (UID)																	
+			...,					<-- 		Anything :)							
+		)
 
--- Custom assertion function
+		\\\ Substitute for BindableEvent.Event
+		Signal.Fired(
+			signalName,				<--	|REQ|	Signal name (UID)																	
+			...,					<-- 		Anything :)							
+		)
+
+		\\\ Substitute for BindableFunction:Invoke
+		Signal.Invoke(
+			signalName,				<--	|REQ|	Signal name (UID)																	
+			...,					<-- 		Anything :)							
+		)
+
+		\\\ Substitute for BindableFunction.Invoked
+		Signal.Invoked(
+			signalName,				<--	|REQ|	Signal name (UID)																	
+			...,					<-- 		Anything :)							
+		)
+
+		\\\ Returns signal instance
+		Signal.Get(
+			signalName,				<--	|REQ|	Signal name (UID)																						
+		)
+--]]
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------|       Top       |--------
+local Signal = {}
+
+--------|     Setting     |--------
+
+--------|     Library     |--------
+local _L; coroutine.wrap(function()  _L = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"))  end)()
+
+--------|    Reference    |--------
+local isServer = _L.Services.RunService:IsServer()
+local events = {}
+local funcs = {}
+
+--------|    Variables    |--------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--- Assert functions (ensures Signal is used correctly)
 local function assertTypeNumber(num)
 	assert(typeof(num) == "number", "Expected a number")
 end
@@ -12,11 +107,8 @@ local function assertTypeString(str)
 	assert(typeof(str) == "string", "Expected a string")
 end
 
---- Dictionary for BindableEvents
-local events = {}
-local functions = {}
 
---- List of services
+--- Handle list of services that we're able to use
 local services = { 
 	game:GetService("ReplicatedFirst"), 
 	game:GetService("ReplicatedStorage"), 
@@ -72,91 +164,105 @@ local function handleErrorsAndWarnings(errMsg)
 	end
 end
 
--- Create or retrieve a BindableEvent
-local function getEvent(eventName)
-	assertTypeString(eventName)
-	eventName = eventName:lower()
-	local event = events[eventName]
-	if not event then
-		event = Instance.new("BindableEvent")
-		events[eventName] = event
-	end
-	return event
-end
 
-local Signal = {}
-
+--- Fire
 Signal.Fire = function(eventName, ...)
+
+	--- Ensure integrity
 	if not handleErrorsAndWarnings(eventName) then
 		return
 	end
+	
+	--- Variables
 	assertTypeString(eventName)
 	eventName = string.lower(eventName)
+
+	--- Get/create event
+	local event = GetEvent(eventName)
+
+	--- Signal for visualization/tracking purposes on Debug (Client only) META AF BTW
 	if not isServer and eventName ~= "core signal fired" then
 		Signal.Fire("CORE Signal Fired", eventName)
 	end
-	getEvent(eventName):Fire(...)
+
+	--- Fire event w/ data
+	event:Fire(...)
 end
 
+
+--- On Fire
 Signal.Fired = function(eventName)
+
+	--- Ensure integrity
 	if not handleErrorsAndWarnings(eventName) then
 		return Instance.new("BindableEvent").Event
 	end
-	assertTypeString(eventName)
+
+	--- Variables
 	eventName = string.lower(eventName)
-	return getEvent(eventName).Event
-end
--- Crate or retrieve a BindableFunction
-local function getFunction(functionName)
-	assertTypeString(functionName)
-	functionName = functionName:lower()
-	local signalFunction = functions[functionName]
-	if not signalFunction then
-		signalFunction = Instance.new("BindableFunction")
-		functions[functionName] = signalFunction
-	end
-	return signalFunction
+
+	--- Get/Create event
+	assertTypeString(eventName)	
+	local event = GetEvent(eventName)
+
+	--
+	return GetEvent(eventName).Event
 end
 
-Signal.Invoke = function(functionName, ...)
-	if not handleErrorsAndWarnings(functionName) then
+
+--- Invoke
+Signal.Invoke = function(funcName, ...)
+	if not handleErrorsAndWarnings(funcName) then
 	  return
 	end
-	assertTypeString(functionName)
-	functionName = string.lower(functionName)
-	if not isServer and functionName ~= "core signal fired" then
-		Signal.Fire("CORE Signal Fired", functionName)
+	assertTypeString(funcName)
+	funcName = string.lower(funcName)
+	if not isServer and funcName ~= "core signal fired" then
+		Signal.Fire("CORE Signal Fired", funcName)
 	end
-	return getFunction(functionName):Invoke(...)
+
+	--
+	return GetFunc(funcName):Invoke(...)
 end
 
+
+--- Invoked
 Signal.Invoked = function(functionName)
 	if not handleErrorsAndWarnings(functionName) then
 		return Instance.new("BindableFunction")
 	end
 	assertTypeString(functionName)
 	functionName = string.lower(functionName)
-	return getFunction(functionName)
+
+	--
+	return GetFunc(functionName)
 end
 
+--- Get signal instance
 Signal.Get = function(eventName)
 	if not handleErrorsAndWarnings(eventName) then
 		return Instance.new("BindableEvent")
 	end
+	--- Variables
 	assertTypeString(eventName)
 	eventName = string.lower(eventName)
-	return getEvent(eventName)
+	
+	--
+	return GetEvent(eventName)
 end
 
--- Freeze the Signal dictionary
+--- Freeze Signal to prevent tampering
 table.freeze(Signal)
 
--- If the environment is a client, add external modification detection
+--- If the environment is a client, add external modification detection
 if game:GetService("RunService"):IsClient() then
 	task.spawn(function(modifiedSignal)
 		local clonedSignal = table.clone(modifiedSignal)
 		setmetatable(clonedSignal, nil)
+		--[[
+		TODO: I cannot wrap my head around metatables, so I can't accurately comment this :(
 
+		]]
 		local function compareTables(table1, table2)
 			if table1 ~= table2 then
 				if typeof(table1) ~= "table" or typeof(table2) ~= "table" then
@@ -182,7 +288,49 @@ if game:GetService("RunService"):IsClient() then
 	end, Signal)
 end
 
-return Signal
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--- Get (or create) BindableEvent
+function GetEvent(eventName)
+	--- Variables
+	assertTypeString(eventName)
+	eventName = eventName:lower()
+	local event = events[eventName]
+
+	--- Check if event already exists
+	if not event then
+		--- Create event
+		event = Instance.new("BindableEvent")
+		events[eventName] = event
+	end
+
+	--
+	return event
+end
+
+--- Get (or create) a BindableFunction
+function GetFunc(funcName)
+	--- Variables
+	assertTypeString(funcName)
+	funcName = funcName:lower()
+	local func = funcs[funcName]
+
+	--- Check if function already exists
+	if not func then
+		func = Instance.new("BindableFunction")
+		func[funcName] = signalFunction
+	end
+	return func
+end
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+return Signal
 
 

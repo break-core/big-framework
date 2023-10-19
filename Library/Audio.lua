@@ -106,7 +106,7 @@ local isClient = RunService:IsClient()
 	Roblox audio player...
 	Very customizable! Please read the documentation above
 ]]
-function Audio.Play(...) -- Line: 109
+function Audio.Play(...)
 	--- If server, tell clients to play sound (to keep a secular soundscape)
 	if not isClient then
 		local ServerScriptService = game:GetService("ServerScriptService")
@@ -166,7 +166,7 @@ function Audio.Play(...) -- Line: 109
 	if not pcall(function() local x = parent.Parent end) then
 		local position = parent
 		--- If Vector3, convert to CFrame
-		pcall(function() -- Line: 169
+		pcall(function() 
 			position = CFrame.new(position)
 		end)
 		
@@ -214,7 +214,7 @@ end
 
 
 --- Audio player for music
-function Audio.PlayMusic(id, volume, speed, soundGroup, looped, startTime) -- Line: 217
+function Audio.PlayMusic(id, volume, speed, soundGroup, looped, startTime)
 	--- Disable being called on server (compatibility reasons)
 	if not isClient then
 		warn("Cannot use this on the server!")
@@ -257,7 +257,7 @@ function Audio.PlayMusic(id, volume, speed, soundGroup, looped, startTime) -- Li
 	music:Play()
 	
 	--- Fade function
-	local function Fade(song, newVolume) -- Line: 260
+	local function Fade(song, newVolume)
 		Functions.Tween(song, {Volume = newVolume}, {speed})
 	end
 	
@@ -276,7 +276,7 @@ function Audio.PlayMusic(id, volume, speed, soundGroup, looped, startTime) -- Li
 end
 
 
-function Audio.StopMusic(speed) -- Line: 279
+function Audio.StopMusic(speed)
 	--- Disable being called on server (compatibility reasons)
 	if not isClient then
 		warn("Cannot use this on the server!")
@@ -287,7 +287,7 @@ function Audio.StopMusic(speed) -- Line: 279
 	speed = speed or 1
 	
 	--- Fade function
-	local function Fade(song, newVolume) -- Line: 290
+	local function Fade(song, newVolume)
 		Functions.Tween(song, {Volume = newVolume}, {speed})
 	end
 	
@@ -302,14 +302,14 @@ end
 
 
 --- Pile onto garbage collection
-function AddToGarbageCollection(sound, parentWasGenerated) -- Line: 305
+function AddToGarbageCollection(sound, parentWasGenerated)
 	--- Add garbage collection
 	table.insert(garbage, {sound, parentWasGenerated or false})
 end
 
 
 --- Scan garbage collection for GARBAGE
-function ScanGarbageCollection() -- Line: 312
+function ScanGarbageCollection()
 	for i = #garbage, 1, -1 do
 		if i % 25 == 0 then
 			RunService.Heartbeat:Wait()
@@ -392,7 +392,7 @@ end)()
 
 --- Disabled sounds
 if isClient then
-	coroutine.wrap(function() -- Line: 395
+	coroutine.wrap(function()
 		local Settings = require(ClientLibrary.Settings)
 		local last = Settings.SoundsEnabled
 		while true do
@@ -426,7 +426,7 @@ end
 
 --- Recieve sounds from server
 if isClient then
-	require(ClientLibrary.Network).Fired("PlaySound"):Connect(function(...) -- Line: 429
+	require(ClientLibrary.Network).Fired("PlaySound"):Connect(function(...)
 		Audio.Play(...)
 	end)
 end
